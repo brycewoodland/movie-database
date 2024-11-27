@@ -119,6 +119,77 @@ def query_data():
     for row in rating_rows:
         print(row)
 
+def update_movie():
+    '''
+    This function updates an existing movie in the database.
+
+    Parameters:
+    NONE
+
+    Returns:
+    NONE
+    '''
+    movie_id = int(input("Enter movie ID to update: "))
+    cursor.execute('SELECT id FROM movies WHERE id = ?', (movie_id,))
+    if cursor.fetchone() is None:
+        print("Movie ID does not exist.")
+        return
+    
+    title = input('Enter new movie title: ')
+    year = int(input('Enter new movie year: '))
+    genre = input('Enter new movie genre: ')
+    cursor.execute('UPDATE movies SET title = ?, year = ?, genre = ? WHERE id = ?', (title, year, genre, movie_id))
+    conn.commit()
+    print('Movie updated succesfully!')
+
+def update_user():
+    '''
+    This function updates an existing movie in the database.
+
+    Parameters:
+    NONE
+
+    Returns:
+    NONE
+    '''
+    user_id = int(input("Enter user ID to update: "))
+    cursor.execute('SELECT id FROM users WHERE id = ?', (user_id,))
+    if cursor.fetchone() is None:
+        print("User ID does not exist.")
+        return
+    
+    name = input('Enter new user name: ')
+    email = input('Enter new user email: ')
+    cursor.execute('UPDATE users SET name = ?, email = ? WHERE id = ?', (name, email, user_id))
+    conn.commit()
+    print('User updated successfully!')
+
+def update_rating():
+    '''
+    This function updates an existing movie in the database.
+
+    Parameters:
+    NONE
+
+    Returns:
+    NONE
+    '''
+    user_id = int(input("Enter user ID: "))
+    movie_id = int(input("Enter movie ID: "))
+    cursor.execute('SELECT rating FROM ratings WHERE user_id = ? AND movie_id = ?', (user_id, movie_id))
+    if cursor.fetchone() is None:
+        print("Rating does not exist for this user and movie.")
+        return
+    
+    rating = int(input("Enter new rating (1-5): "))
+    if rating < 1 or rating > 5:
+        print("Rating must be between 1 and 5.")
+        return
+
+    cursor.execute('UPDATE ratings SET rating = ? user_id = ? AND movie_id = ? WHERE id = ?', (rating, user_id, movie_id))
+    conn.commit()
+    print("Rating updated successfully!")
+
 # Main function to run the script
 def main():
     while True:
@@ -126,8 +197,11 @@ def main():
         print("1. Add a new movie")
         print("2. Add a new user")
         print("3. Add a new rating")
-        print("4. Query data")
-        print("5. Exit")
+        print("4. Update a movie")
+        print("5. Update a user")
+        print("6. Update rating")
+        print("7. Query data")
+        print("8. Exit")
         choice = input("Enter your choice: ")
         if choice == '1':
             insert_movie()
@@ -136,8 +210,14 @@ def main():
         elif choice == '3':
             insert_rating()
         elif choice == '4':
-            query_data()
+            update_movie()
         elif choice == '5':
+            update_user()
+        elif choice == '6':
+            update_rating()
+        elif choice == '7':
+            query_data()
+        elif choice == '8':
             break
         else:
             print("Invalid choice. Please try again.")
