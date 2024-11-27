@@ -83,42 +83,6 @@ def insert_rating():
     except sqlite3.IntegrityError:
         print("Error: This user has already rated this movie.")
 
-def query_data():
-    '''
-    This function queries and prints data from the database.
-
-    Parameters:
-    NONE
-
-    Returns:
-    NONE
-    '''
-    # Query data from the movies table
-    cursor.execute('SELECT * FROM movies')
-    movie_rows = cursor.fetchall()
-    print("\nMovies:")
-    for row in movie_rows:
-        print(row)
-
-    # Query data from the users table
-    cursor.execute('SELECT * FROM users')
-    user_rows = cursor.fetchall()
-    print("\nUsers:")
-    for row in user_rows:
-        print(row)
-
-    # Query data for the users ratings
-    cursor.execute('''
-        SELECT movies.title, users.name, ratings.rating
-        FROM ratings
-        JOIN movies ON ratings.movie_id = movies.id
-        JOIN users ON ratings.user_id = users.id
-    ''')
-    rating_rows = cursor.fetchall()
-    print("\nRatings:")
-    for row in rating_rows:
-        print(row)
-
 def update_movie():
     '''
     This function updates an existing movie in the database.
@@ -186,9 +150,45 @@ def update_rating():
         print("Rating must be between 1 and 5.")
         return
 
-    cursor.execute('UPDATE ratings SET rating = ? user_id = ? AND movie_id = ? WHERE id = ?', (rating, user_id, movie_id))
+    cursor.execute('UPDATE ratings SET rating = ? WHERE user_id = ? AND movie_id = ?', (rating, user_id, movie_id))
     conn.commit()
     print("Rating updated successfully!")
+
+def query_data():
+    '''
+    This function queries and prints data from the database.
+
+    Parameters:
+    NONE
+
+    Returns:
+    NONE
+    '''
+    # Query data from the movies table
+    cursor.execute('SELECT * FROM movies')
+    movie_rows = cursor.fetchall()
+    print("\nMovies:")
+    for row in movie_rows:
+        print(row)
+
+    # Query data from the users table
+    cursor.execute('SELECT * FROM users')
+    user_rows = cursor.fetchall()
+    print("\nUsers:")
+    for row in user_rows:
+        print(row)
+
+    # Query data for the users ratings
+    cursor.execute('''
+        SELECT movies.title, users.name, ratings.rating
+        FROM ratings
+        JOIN movies ON ratings.movie_id = movies.id
+        JOIN users ON ratings.user_id = users.id
+    ''')
+    rating_rows = cursor.fetchall()
+    print("\nRatings:")
+    for row in rating_rows:
+        print(row)
 
 # Main function to run the script
 def main():
