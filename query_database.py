@@ -154,6 +154,66 @@ def update_rating():
     conn.commit()
     print('Rating updated successfully!')
 
+def delete_movie():
+    '''
+    This function deletes a movie from the database.
+
+    Parameters:
+    NONE
+
+    Returns:
+    NONE
+    '''
+    movie_id = int(input("Enter movie ID to delete: "))
+    cursor.execute('SELECT id FROM movies WHERE id = ?' (movie_id))
+    if cursor.fetchone() is None:
+        print('Movie ID does not exist.')
+        return
+    
+    cursor.execute('DELETE FROM movies WHERE id = ?' (movie_id))
+    conn.commit()
+    print('Movie deleted succesfully!')
+
+def delete_user():
+    '''
+    This function deletes a user from the database.
+
+    Parameters:
+    NONE
+
+    Returns:
+    NONE
+    '''
+    user_id = int(input("Enter user ID to delete: "))
+    cursor.execute('SELECT id FROM users WHERE id = ?' (user_id))
+    if cursor.fetchone() is None:
+        print('User ID does not exist.')
+        return
+    
+    cursor.execute('DELETE FROM users WHERE id = ?' (user_id))
+    conn.commit()
+    print('User deleted succesfully!')
+
+def delete_rating():
+    '''
+    This function deletes a rating from the database.
+
+    Parameters:
+    NONE
+
+    Returns:
+    NONE
+    '''
+    rating_id = int(input("Enter rating ID to delete: "))
+    cursor.execute('SELECT id FROM ratings WHERE id = ?' (rating_id))
+    if cursor.fetchone() is None:
+        print('Rating ID does not exist.')
+        return
+    
+    cursor.execute('DELETE FROM ratings WHERE id = ?' (rating_id))
+    conn.commit()
+    print('Rating deleted succesfully!')
+
 def query_data():
     '''
     This function queries and prints data from the database.
@@ -200,8 +260,11 @@ def main():
         print('4. Update a movie')
         print('5. Update a user')
         print('6. Update rating')
-        print('7. Query data')
-        print('8. Exit')
+        print('7. Delete a movie')
+        print('8. Delete a user')
+        print('9. Delete a rating')
+        print('10. Query data')
+        print('11. Exit')
         choice = input('Enter your choice: ')
         if choice == '1':
             insert_movie()
@@ -216,6 +279,12 @@ def main():
         elif choice == '6':
             update_rating()
         elif choice == '7':
+            delete_movie()
+        elif choice == '8':
+            delete_user()
+        elif choice == '9':
+            delete_rating()
+        elif choice == '10':
             query_data()
         elif choice == '8':
             break
