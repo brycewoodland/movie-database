@@ -1,5 +1,13 @@
 import sqlite3
 import requests
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the API key from environment variables
+api_key = os.getenv('OMDB_API_KEY')
 
 # Connect to the database
 conn = sqlite3.connect('C:\\Users\\bb_br\\movieDatabase\\movieDatabase.db')
@@ -17,11 +25,12 @@ def fetch_movie_details(title):
     dict: A dictionary containing movie details if the request is successful.
     None: If the request fails or the movie is not found.
     '''
-    api_key = '60cd0690'  # Replace with your OMDb API key
-    print(f"Using API key: {api_key}")  # Debugging: Print the API key
+    print(f"Using API :key {api_key}")  # Debugging: Print the API key
     url = f'https://www.omdbapi.com/?t={title}&apikey={api_key}'
     print(f"Fetching details for: {title}")
     response = requests.get(url)
+    print(f"Response status code: {response.status_code}")
+    print(f"Response content: {response.content}")
     if response.status_code == 200:
         return response.json()
     else:
@@ -66,18 +75,18 @@ def import_movies_from_api(movie_titles):
             print(f'Movie "{title}" not found or error occurred.')
 
 # List of movie titles to import
-# movie_titles = [
-#     'Interstellar',
-#     'The Dark Knight',
-#     'Jaws',
-#     'Jurassic Park',
-#     'Fantastic Mr. Fox',
-#     '2001: A Space Odyssey',
-#     "Singin' in the Rain"
-# ]
+movie_titles = [
+    'Interstellar',
+    'The Dark Knight',
+    'Jaws',
+    'Jurassic Park',
+    'Fantastic Mr. Fox',
+    '2001: A Space Odyssey',
+    "Singin' in the Rain"
+]
 
 # Import movies from the list
-# import_movies_from_api(movie_titles)
+import_movies_from_api(movie_titles)
 
 # Function to insert a new user
 def insert_user():
