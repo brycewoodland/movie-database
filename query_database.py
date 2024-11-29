@@ -74,19 +74,16 @@ def import_movies_from_api(movie_titles):
         else:
             print(f'Movie "{title}" not found or error occurred.')
 
-# List of movie titles to import
-movie_titles = [
-    'Interstellar',
-    'The Dark Knight',
-    'Jaws',
-    'Jurassic Park',
-    'Fantastic Mr. Fox',
-    '2001: A Space Odyssey',
-    "Singin' in the Rain"
-]
+# # List of movie titles to import
+# movie_titles = [
+#     'Toy Story',
+#     'The Incredibles',
+#     'Inside Out',
+#     'Coco'
+# ]
 
-# Import movies from the list
-import_movies_from_api(movie_titles)
+# # Import movies from the list
+# import_movies_from_api(movie_titles)
 
 # Function to insert a new user
 def insert_user():
