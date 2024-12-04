@@ -60,7 +60,7 @@ Instructions for using the software:
 
 1. Launch the application. You will see a menu with options for different operations.
 2. Follow the prompts to add movies, users, or ratings or to update, delete, or query the database.
-3. To import movies using the OMDb API, add titles to a list in the ```pythonimport_movies_from_api```function and call it.
+3. To import movies using the OMDb API, add titles to a list in the ```import_movies_from_api```function and call it.
 
 ## Development Environment 
 
