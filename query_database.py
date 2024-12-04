@@ -54,6 +54,26 @@ def insert_movie(title, year, genre):
     conn.commit()
     print(f'Movie "{title}" added successfully!')
 
+def insert_movie_manually():
+    '''
+    This function inserts a new movie into the database.
+
+    Parameters:
+    title (str): The title of the movie.
+    year (int): The release year of the movie.
+    genre (str): The genre of the movie.
+
+    Returns:
+    NONE
+    '''
+    title = input('Enter title of movie: ')
+    year = int(input('Enter the release year for movie: '))
+    genre = input('Enter the genre of the movie: ')
+    cursor.execute('INSERT INTO movies (title, year, genre) VALUES (?, ?, ?)', (title, year, genre))
+    conn.commit()
+    print(f'Movie "{title}" added successfully!')
+
+
 # Function to import movies from a list of titles
 def import_movies_from_api(movie_titles):
     '''
@@ -76,10 +96,7 @@ def import_movies_from_api(movie_titles):
 
 # # List of movie titles to import
 # movie_titles = [
-#     'Toy Story',
-#     'The Incredibles',
-#     'Inside Out',
-#     'Coco'
+#     'Big Jake',
 # ]
 
 # # Import movies from the list
@@ -342,7 +359,7 @@ def main():
         print("11. Exit")
         choice = input("Enter your choice: ")
         if choice == '1':
-            insert_movie()
+            insert_movie_manually()
         elif choice == '2':
             insert_user()
         elif choice == '3':
