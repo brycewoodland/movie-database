@@ -16,10 +16,12 @@ Steps to build and/or run the software:
 
 1. Install SQLite and Python
 2. Install required libraries:
+
    `bash
     pip install sqlite3 requests python-dotenv
   `
 4. Set up .env file in the project directory with your OMDb key:
+
    `bash
    OMDB_API_KEY=your_api_key_here
    `
@@ -49,6 +51,7 @@ Steps to build and/or run the software:
   );
   ```
 6. Run the script:
+
    `bash
    python <script_name>.py
    `
